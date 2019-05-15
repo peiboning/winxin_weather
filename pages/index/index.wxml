@@ -2,12 +2,17 @@
   <heartbeat id='heartbeat' wx:if='{{showHeartbeat}}'></heartbeat>
   <view class='bcg' wx:if='{{!bcgImg}}' style='background: {{bcgColor}}'></view>
   <image class='bcg' wx:if='{{bcgImg}}' src='{{bcgImg}}' mode='aspectFill'></image>
+
+  <!--搜索 start-->
   <view class='search' wx:if='{{!setting.hiddenSearch && !bcgImgAreaShow}}' style='background:rgba(255, 255, 255, 0)'>
     <view class='wrapper'>
       <image src='/img/search.png'></image>
       <input placeholder-class='placeholderClass' confirm-type='search' placeholder='请输入城市名，快速查询天气信息' maxlength='20' bindconfirm='commitSearch' value='{{searchText}}' disabled='{{!enableSearch}}'></input>
     </view>
   </view>
+  <!--搜索 end-->
+
+  <!--背景选择 start-->
   <view class='chooseBcg' wx:if='{{bcgImgAreaShow}}'>
     <view class='top'>
       <view class='title'>更换背景</view>
@@ -21,6 +26,8 @@
       <image src='/img/up-arrow.png'></image>
     </view>
   </view>
+  <!--背景选择 end-->
+
   <view class='content' wx:if='{{!bcgImgAreaShow}}' style='margin-top: {{setting.hiddenSearch ? 20 : 60}}px'>
     <view class='avatarInfo' catchtap='showBcgImgArea'>
       <open-data class='avatar' type='userAvatarUrl'></open-data>
@@ -134,7 +141,8 @@
         </view>
       </view>
     </view>
-    <view class='footer'>开发者 · myvin</view>
+    <!-- 底部文字-->
+    <view class='footer'>到底了</view>
   </view>
   <view wx:if='{{openSettingButtonShow}}' class='openSettingButton'>
     <image src='/img/unlock.png'></image>
@@ -142,11 +150,11 @@
   </view>
   <!-- 悬浮菜单 -->
   <view class='menus' wx:if='{{!bcgImgAreaShow}}'>
-    <image src="/img/share_circle.png" animation="{{animationOne}}" class="menu"></image>
-    <button plain='true' open-type='share' animation="{{animationOne}}" class='menu share'></button>
+    <!-- <image src="/img/share_circle.png" animation="{{animationOne}}" class="menu"></image> -->
+    <!-- <button plain='true' open-type='share' animation="{{animationOne}}" class='menu share'></button> -->
     <image src="/img/setting.png" animation="{{animationTwo}}" class="menu" catchtap="menuToSetting"></image>
     <image src="/img/location.png" animation="{{animationThree}}" class="menu" catchtap="menuToCitychoose"></image>
-    <image src="/img/info.png" animation="{{animationFour}}" class="menu" catchtap="menuToAbout"></image>
+    <!-- <image src="/img/info.png" animation="{{animationFour}}" class="menu" catchtap="menuToAbout"></image> -->
     <image src="/img/menu.png" animation="{{animationMain}}" class="menu main" catchtap="menuMain"></image>
   </view>
 </view>

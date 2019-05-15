@@ -400,6 +400,6 @@ page {
   justify-content: space-around;
   align-items: center;
   height: 60rpx;
-  font-size: 22rpx;
+  font-size: 32rpx;
   color: #fff;
 }

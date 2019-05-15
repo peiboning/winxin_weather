@@ -7,15 +7,14 @@
     "pages/systeminfo/systeminfo"
   ],
   "window": {
-    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#40a7e7",
-    "navigationBarTitleText": "Quiet Weather",
-    "navigationBarTextStyle": "light"
+    "navigationBarTitleText": "生活天气",
+    "navigationBarTextStyle": "black"
   },
   "permission": {
     "scope.userLocation": {
       "desc": "定位以获取当前位置天气信息"
     }
   },
-  "cloud": true
+  "sitemapLocation": "sitemap.json"
 }

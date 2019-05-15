@@ -99,7 +99,9 @@ Page({
     // heartbeat 时禁止搜索，防止动画执行
     enableSearch: true,
     openSettingButtonShow: false,
-    shareInfo: {},
+    shareInfo: {
+      "title":"生活天气"
+    },
   },
   success (data, location) {
     this.setData({
@@ -209,9 +211,12 @@ Page({
     })
     wx.getLocation({
       success: (res) => {
+        console.log(res)
         this.getWeather(`${res.latitude},${res.longitude}`)
         this.getHourly(`${res.latitude},${res.longitude}`)
         callback && callback()
+        
+
       },
       fail: (res) => {
         this.fail(res)
@@ -359,19 +364,19 @@ Page({
     if (!utils.isEmptyObject(this.data.shareInfo)) {
       return
     }
-    wx.cloud.callFunction({
-      name: 'getShareInfo',
-    })
-    .then(res => {
-      let shareInfo = res.result
-      if (shareInfo) {
-        if (!utils.isEmptyObject(shareInfo)) {
-          this.setData({
-            shareInfo,
-          })
-        }
-      }
-    })
+    // wx.cloud.callFunction({
+    //   name: 'getShareInfo',
+    // })
+    // .then(res => {
+    //   let shareInfo = res.result
+    //   if (shareInfo) {
+    //     if (!utils.isEmptyObject(shareInfo)) {
+    //       this.setData({
+    //         shareInfo,
+    //       })
+    //     }
+    //   }
+    // })
   },
   onLoad () {
     this.reloadPage()
@@ -454,7 +459,7 @@ Page({
   onShareAppMessage (res) {
     let shareInfo = this.data.shareInfo
     return {
-      title: shareInfo.title || 'Quiet Weather',
+      title: shareInfo.title,
       path: shareInfo.path || '/pages/index/index',
       imageUrl: shareInfo.imageUrl,
     }
