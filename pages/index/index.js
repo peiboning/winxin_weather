@@ -4,6 +4,9 @@ const key = globalData.key
 let SYSTEMINFO = globalData.systeminfo
 Page({
   data: {
+    searchAlpha:1.0,
+    searchHeight: 0,
+    isShowSearch: true,
     isIPhoneX: globalData.isIPhoneX,
     message: '',
     cityDatas: {},
@@ -364,22 +367,19 @@ Page({
     if (!utils.isEmptyObject(this.data.shareInfo)) {
       return
     }
-    // wx.cloud.callFunction({
-    //   name: 'getShareInfo',
-    // })
-    // .then(res => {
-    //   let shareInfo = res.result
-    //   if (shareInfo) {
-    //     if (!utils.isEmptyObject(shareInfo)) {
-    //       this.setData({
-    //         shareInfo,
-    //       })
-    //     }
-    //   }
-    // })
   },
   onLoad () {
+    var that = this;
     this.reloadPage()
+    console.log('onloaded');
+    var query = wx.createSelectorQuery();
+    query.select("#search").boundingClientRect();
+    query.exec(function (res) {
+      that.data.searchHeight = res[0].height;
+      console.log("search height is :" + that.data.searchHeight);
+    })
+
+
   },
   reloadPage () {
     this.setBcgImg()
@@ -571,4 +571,26 @@ Page({
       animationFour: animationFour.export(),
     })
   },
+
+  
+
+  onPageScroll: function (ev) {
+    
+        console.log("scroll top is " + ev.scrollTop)
+    var scrollTop = ev.scrollTop;
+    if (scrollTop > this.data.searchHeight){
+      this.setData({
+        searchAlpha:0
+      })
+    }else{
+      var alph = (this.data.searchHeight - scrollTop) / this.data.searchHeight;
+      console.log("scroll alph " + alph)
+      this.setData({
+        searchAlpha: alph
+      })
+    }
+
+  }
+
+
 })

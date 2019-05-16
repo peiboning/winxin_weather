@@ -4,7 +4,7 @@
   <image class='bcg' wx:if='{{bcgImg}}' src='{{bcgImg}}' mode='aspectFill'></image>
 
   <!--搜索 start-->
-  <view class='search' wx:if='{{!setting.hiddenSearch && !bcgImgAreaShow}}' style='background:rgba(255, 255, 255, 0)'>
+  <view id='search' class='search' wx:if='{{isShowSearch && !setting.hiddenSearch && !bcgImgAreaShow}}' style='background:rgba(255, 255, 255, 0);opacity:{{searchAlpha}}'>
     <view class='wrapper'>
       <image src='/img/search.png'></image>
       <input placeholder-class='placeholderClass' confirm-type='search' placeholder='请输入城市名，快速查询天气信息' maxlength='20' bindconfirm='commitSearch' value='{{searchText}}' disabled='{{!enableSearch}}'></input>
@@ -28,12 +28,17 @@
   </view>
   <!--背景选择 end-->
 
-  <view class='content' wx:if='{{!bcgImgAreaShow}}' style='margin-top: {{setting.hiddenSearch ? 20 : 60}}px'>
+  <!--内容-->
+  <view id="mainView" class='content' wx:if='{{!bcgImgAreaShow}}' style='margin-top: {{setting.hiddenSearch ? 20 : 60}}px'>
+    <!--头像start-->
     <view class='avatarInfo' catchtap='showBcgImgArea'>
       <open-data class='avatar' type='userAvatarUrl'></open-data>
       <open-data class='name' type='userNickName'></open-data>
       <image class='downArrow' src='/img/down.png'></image>
     </view>
+    <!--头像end-->
+
+    <!--天气信息 start-->
     <view class='info'>
       <view class='city'>
         <view class='name' bindtap='toCitychoose'>
@@ -141,9 +146,10 @@
         </view>
       </view>
     </view>
-    <!-- 底部文字-->
     <view class='footer'>到底了</view>
   </view>
+  <!--天气信息 end-->
+
   <view wx:if='{{openSettingButtonShow}}' class='openSettingButton'>
     <image src='/img/unlock.png'></image>
     <button open-type='openSetting'></button>
