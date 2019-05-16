@@ -55,26 +55,17 @@
         <text>能见度 {{cityDatas.now.vis}}</text>
       </view>
     </view>
-    <view class='guide' wx:if='{{cityDatas.daily_forecast}}'>
-      <view class='title'>7 天预报</view>
-      <view class='guides'>
-        <view class='item' wx:for='{{cityDatas.daily_forecast}}' wx:key='{{index}}'>
-          <view class='date i'>{{item.date}}</view>
-          <view class='temperature i'>{{item.tmp_max}}~{{item.tmp_min}}℃</view>
-          <view class='weather i'>
-            <text>{{item.cond_txt_d}}</text>
-            <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image>
-          </view>
-          <view class='wind i'>{{item.wind_dir}}{{item.wind_sc}}级</view>
-        </view>
-      </view>
-    </view>
+
+    <!--详细温度 start-->
     <view class='details'>
       <view class='detail' wx:for='{{detailsDic.key}}' wx:key='{{index}}'>
         <view>{{detailsDic.val[item]}}</view>
         <view>{{cityDatas.now[item]}}</view>
       </view>
     </view>
+    <!--详细温度 end-->
+
+    <!--分时温度 start-->
     <view class='hourly' wx:if='{{hourlyDatas.length}}'>
       <view class='title'>24 小时逐 3 小时预报</view>
       <view class='hours'>
@@ -136,6 +127,25 @@
         </swiper>
       </view>
     </view>
+    <!--分时温度 end-->
+
+    <!--7预报start-->
+    <view class='guide' wx:if='{{cityDatas.daily_forecast}}'>
+      <view class='title'>7 天预报</view>
+      <view class='guides'>
+        <view class='item' wx:for='{{cityDatas.daily_forecast}}' wx:key='{{index}}'>
+          <view class='date i'>{{item.date}}</view>
+          <view class='temperature i'>{{item.tmp_max}}~{{item.tmp_min}}℃</view>
+          <view class='weather i'>
+            <text>{{item.cond_txt_d}}</text>
+            <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image>
+          </view>
+          <view class='wind i'>{{item.wind_dir}}{{item.wind_sc}}级</view>
+        </view>
+      </view>
+    </view>
+    <!--7预报end-->
+
     <!-- <ad unit-id="adunit-785cc3f710cc3d4c"></ad> -->
     <view class='livingIndex' wx:if='{{!setting.hiddenIndex}}'>
       <view class='item' wx:for='{{cityDatas.lifestyle}}' wx:key='{{index}}'>
