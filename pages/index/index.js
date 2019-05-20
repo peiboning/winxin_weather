@@ -4,6 +4,8 @@ const key = globalData.key
 let SYSTEMINFO = globalData.systeminfo
 Page({
   data: {
+    backgroundImage:'',
+    air:{},
     searchAlpha:1.0,
     searchHeight: 0,
     isShowSearch: true,
@@ -59,6 +61,8 @@ Page({
     // 需要查询的城市
     searchCity: '',
     setting: {},
+    richu:'/img/richu.png',
+    riluo:'/img/rila.png',
     bcgImgList: [
       {
         src: '/img/beach-bird-birds-235787.jpg',
@@ -226,6 +230,31 @@ Page({
       }
     })
   },
+
+  getAirInfo(data){
+    var that = this;
+    var location = data.basic.parent_city;
+    wx.request({
+      url: `${globalData.requestUrl.air}`,
+      data: {
+        location,
+        key,
+      },
+      success: (res) => {
+        if (res.statusCode === 200) {
+          let data = res.data.HeWeather6[0]
+          if (data.status === 'ok') {
+            that.setData({
+              air: data.air_now_city}
+            )
+          }
+        }
+      },
+      fail: () => {
+      },
+    })
+  },
+
   getWeather (location) {
     wx.request({
       url: `${globalData.requestUrl.weather}`,
@@ -239,6 +268,7 @@ Page({
           if (data.status === 'ok') {
             this.clearInput()
             this.success(data, location)
+            this.getAirInfo(data)
           } else {
             wx.showToast({
               title: '查询失败',
@@ -293,36 +323,63 @@ Page({
       },
     })
   },
-  setBcgImg (index) {
-    if (index !== undefined) {
-      this.setData({
-        bcgImgIndex: index,
-        bcgImg: this.data.bcgImgList[index].src,
-        bcgColor: this.data.bcgImgList[index].topColor,
-      })
-      this.setNavigationBarColor()
-      return
+  setBcgImg1(){
+    var data = new Date();
+    var hours = data.getHours();
+    var color;
+    console.log('now hours is :' + hours);
+    var path = "";
+    if(hours >= 20 || hours<=5){
+      path = '/img/yewan.jpg';
+      color = '#061824';
+    }else if(hours > 17){
+      path = '/img/bangwan.jpg';
+      color = '#383b3d';
+    }else if(hours<7){
+      path = '/img/zaochen.jpg';
+      color = '#6c93bb';
+    }else{
+      color = '#3a96f5';
+      path = '/img/baitian.jpg';
     }
-    wx.getStorage({
-      key: 'bcgImgIndex',
-      success: (res) => {
-        let bcgImgIndex = res.data || 0
-        this.setData({
-          bcgImgIndex,
-          bcgImg: this.data.bcgImgList[bcgImgIndex].src,
-          bcgColor: this.data.bcgImgList[bcgImgIndex].topColor,
-        })
-        this.setNavigationBarColor()
-      },
-      fail: () => {
-        this.setData({
-          bcgImgIndex: 0,
-          bcgImg: this.data.bcgImgList[0].src,
-          bcgColor: this.data.bcgImgList[0].topColor,
-        })
-        this.setNavigationBarColor()
-      },
+    console.log('path :' + path);
+    this.setData({
+      bcgImg: path,
+      bcgColor: color,
     })
+    this.setNavigationBarColor();
+    
+  },
+  setBcgImg (index) {
+    // if (index !== undefined) {
+    //   this.setData({
+    //     bcgImgIndex: index,
+    //     bcgImg: this.data.bcgImgList[index].src,
+    //     bcgColor: this.data.bcgImgList[index].topColor,
+    //   })
+    //   this.setNavigationBarColor()
+    //   return
+    // }
+    // wx.getStorage({
+    //   key: 'bcgImgIndex',
+    //   success: (res) => {
+    //     let bcgImgIndex = res.data || 0
+    //     this.setData({
+    //       bcgImgIndex,
+    //       bcgImg: this.data.bcgImgList[bcgImgIndex].src,
+    //       bcgColor: this.data.bcgImgList[bcgImgIndex].topColor,
+    //     })
+    //     this.setNavigationBarColor()
+    //   },
+    //   fail: () => {
+    //     this.setData({
+    //       bcgImgIndex: 0,
+    //       bcgImg: this.data.bcgImgList[0].src,
+    //       bcgColor: this.data.bcgImgList[0].topColor,
+    //     })
+    //     this.setNavigationBarColor()
+    //   },
+    // })
   },
   setNavigationBarColor (color) {
     let bcgColor = color || this.data.bcgColor
@@ -370,7 +427,8 @@ Page({
   },
   onLoad () {
     var that = this;
-    this.reloadPage()
+    this.setBcgImg1();//按时间来定背景
+    this.reloadPage();
     console.log('onloaded');
     var query = wx.createSelectorQuery();
     query.select("#search").boundingClientRect();
@@ -382,11 +440,11 @@ Page({
 
   },
   reloadPage () {
-    this.setBcgImg()
+    //this.setBcgImg()
     this.getCityDatas()
     this.reloadInitSetting()
     this.reloadWeather()
-    this.reloadGetBroadcast()
+    //this.reloadGetBroadcast()
   },
   checkUpdate (setting) {
     // 兼容低版本

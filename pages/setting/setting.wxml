@@ -1,7 +1,7 @@
 <view class='setting'>
   <!-- 自定义 -->
   <view class='s'>
-  <block wx:if="{{0===1}}">
+  <block wx:if="{{1===1}}">
     <view class='t'>
       <view class='title'>
         <view>自定义</view>

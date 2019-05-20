@@ -31,7 +31,7 @@
   <!--内容-->
   <view id="mainView" class='content' wx:if='{{!bcgImgAreaShow}}' style='margin-top: {{setting.hiddenSearch ? 20 : 60}}px'>
     <!--头像start-->
-    <view class='avatarInfo' catchtap='showBcgImgArea'>
+    <view class='avatarInfo' catchtap='showBcgImgArea' wx:if='{{1 == 0}}'>
       <open-data class='avatar' type='userAvatarUrl'></open-data>
       <open-data class='name' type='userNickName'></open-data>
       <image class='downArrow' src='/img/down.png'></image>
@@ -49,14 +49,35 @@
         <text class='time' wx:if='{{cityDatas.updateTimeFormat}}'>{{cityDatas.updateTimeFormat}} 更新</text>
       </view>
       <view class='message'>{{message}}</view>
-      <view class='temp num' decode='true'>{{cityDatas.now.tmp || '-'}}<text style='font-size:50rpx;position:relative;top:-20px;'>℃</text></view>
+      <view class='temp num' decode='true'>{{cityDatas.now.tmp || '-'}}
+        <text style='font-size:50rpx;position:relative;top:-20px;'>℃</text>
+      </view>
       <view class='weather'>{{cityDatas.now.cond_txt || '--'}}</view>
       <view class='pm'>
-        <text>能见度 {{cityDatas.now.vis}}</text>
+        <text>PM2.5 {{air.pm25}}{{air.qlty}}</text>
+      </view>
+    </view>
+
+    <view class='todayAndTowmorr'>
+      <view class='detail' wx:for='{{cityDatas.daily_forecast}}' wx:key='{{index}}' wx:if='{{index<2}}'>
+        <view wx:if='{{index == 0}}'>
+          <text>今天</text>
+        </view>
+        <view wx:else>
+          <text>明天</text>
+        </view>
+        <view class='weather'>
+          <text>{{item.tmp_min}}~{{item.tmp_max}}℃</text>
+          <text style='margin-left: 10rpx'>{{item.cond_txt_d}}</text>
+          <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image>
+        </view>
       </view>
     </view>
 
     <!--详细温度 start-->
+    <view class='weather_detail title' wx:for='{{cityDatas.daily_forecast}}' wx:key='{{index}}' wx:if='{{index<1}}'>
+    <text>实时详细预报</text>
+    </view>
     <view class='details'>
       <view class='detail' wx:for='{{detailsDic.key}}' wx:key='{{index}}'>
         <view>{{detailsDic.val[item]}}</view>
@@ -135,7 +156,7 @@
       <view class='guides'>
         <view class='item' wx:for='{{cityDatas.daily_forecast}}' wx:key='{{index}}'>
           <view class='date i'>{{item.date}}</view>
-          <view class='temperature i'>{{item.tmp_max}}~{{item.tmp_min}}℃</view>
+          <view class='temperature i'>{{item.tmp_min}}~{{item.tmp_max}}℃</view>
           <view class='weather i'>
             <text>{{item.cond_txt_d}}</text>
             <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image>
