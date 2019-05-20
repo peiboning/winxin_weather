@@ -1,9 +1,5 @@
 App({
   onLaunch () {
-    wx.cloud.init({
-      env: 'envid',
-      traceUser: true,
-    })
     wx.getSystemInfo({
       success: (res) => {
         this.globalData.systeminfo = res
@@ -16,11 +12,13 @@ App({
     keepscreenon:false,
     systeminfo: {},
     isIPhoneX: false,
-    key: 'ur hefengtianqi key',
+    key: '5b69e94aa9b041a9b8393b14360f188b',
     weatherIconUrl: 'https://cdn.heweather.com/cond_icon/',
     requestUrl: {
       weather: 'https://free-api.heweather.com/s6/weather',
       hourly: 'https://free-api.heweather.com/s6/weather/hourly',
+      air:'https://free-api.heweather.net/s6/air/now'
     },
+    cityDatas: {},
   },
 })

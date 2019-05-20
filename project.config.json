@@ -10,8 +10,10 @@
 	"cloudfunctionRoot": "cloudfunction/",
 	"compileType": "miniprogram",
 	"libVersion": "2.3.0",
-	"appid": "ur appid",
-	"projectname": "weather",
+	"appid": "wx3eeedc747622e935",
+	"projectname": "life_weather",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

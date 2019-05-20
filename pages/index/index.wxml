@@ -2,12 +2,17 @@
   <heartbeat id='heartbeat' wx:if='{{showHeartbeat}}'></heartbeat>
   <view class='bcg' wx:if='{{!bcgImg}}' style='background: {{bcgColor}}'></view>
   <image class='bcg' wx:if='{{bcgImg}}' src='{{bcgImg}}' mode='aspectFill'></image>
-  <view class='search' wx:if='{{!setting.hiddenSearch && !bcgImgAreaShow}}' style='background:rgba(255, 255, 255, 0)'>
+
+  <!--搜索 start-->
+  <view id='search' class='search' wx:if='{{isShowSearch && !setting.hiddenSearch && !bcgImgAreaShow}}' style='background:rgba(255, 255, 255, 0);opacity:{{searchAlpha}}'>
     <view class='wrapper'>
       <image src='/img/search.png'></image>
       <input placeholder-class='placeholderClass' confirm-type='search' placeholder='请输入城市名，快速查询天气信息' maxlength='20' bindconfirm='commitSearch' value='{{searchText}}' disabled='{{!enableSearch}}'></input>
     </view>
   </view>
+  <!--搜索 end-->
+
+  <!--背景选择 start-->
   <view class='chooseBcg' wx:if='{{bcgImgAreaShow}}'>
     <view class='top'>
       <view class='title'>更换背景</view>
@@ -21,12 +26,19 @@
       <image src='/img/up-arrow.png'></image>
     </view>
   </view>
-  <view class='content' wx:if='{{!bcgImgAreaShow}}' style='margin-top: {{setting.hiddenSearch ? 20 : 60}}px'>
-    <view class='avatarInfo' catchtap='showBcgImgArea'>
+  <!--背景选择 end-->
+
+  <!--内容-->
+  <view id="mainView" class='content' wx:if='{{!bcgImgAreaShow}}' style='margin-top: {{setting.hiddenSearch ? 20 : 60}}px'>
+    <!--头像start-->
+    <view class='avatarInfo' catchtap='showBcgImgArea' wx:if='{{1 == 0}}'>
       <open-data class='avatar' type='userAvatarUrl'></open-data>
       <open-data class='name' type='userNickName'></open-data>
       <image class='downArrow' src='/img/down.png'></image>
     </view>
+    <!--头像end-->
+
+    <!--天气信息 start-->
     <view class='info'>
       <view class='city'>
         <view class='name' bindtap='toCitychoose'>
@@ -37,25 +49,34 @@
         <text class='time' wx:if='{{cityDatas.updateTimeFormat}}'>{{cityDatas.updateTimeFormat}} 更新</text>
       </view>
       <view class='message'>{{message}}</view>
-      <view class='temp num' decode='true'>{{cityDatas.now.tmp || '-'}}<text style='font-size:50rpx;position:relative;top:-20px;'>℃</text></view>
+      <view class='temp num' decode='true'>{{cityDatas.now.tmp || '-'}}
+        <text style='font-size:50rpx;position:relative;top:-20px;'>℃</text>
+      </view>
       <view class='weather'>{{cityDatas.now.cond_txt || '--'}}</view>
       <view class='pm'>
-        <text>能见度 {{cityDatas.now.vis}}</text>
+        <text>PM2.5 {{air.pm25}}{{air.qlty}}</text>
       </view>
     </view>
-    <view class='guide' wx:if='{{cityDatas.daily_forecast}}'>
-      <view class='title'>7 天预报</view>
-      <view class='guides'>
-        <view class='item' wx:for='{{cityDatas.daily_forecast}}' wx:key='{{index}}'>
-          <view class='date i'>{{item.date}}</view>
-          <view class='temperature i'>{{item.tmp_max}}~{{item.tmp_min}}℃</view>
-          <view class='weather i'>
-            <text>{{item.cond_txt_d}}</text>
-            <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image>
-          </view>
-          <view class='wind i'>{{item.wind_dir}}{{item.wind_sc}}级</view>
+
+    <view class='todayAndTowmorr'>
+      <view class='detail' wx:for='{{cityDatas.daily_forecast}}' wx:key='{{index}}' wx:if='{{index<2}}'>
+        <view wx:if='{{index == 0}}'>
+          <text>今天</text>
+        </view>
+        <view wx:else>
+          <text>明天</text>
+        </view>
+        <view class='weather'>
+          <text>{{item.tmp_min}}~{{item.tmp_max}}℃</text>
+          <text style='margin-left: 10rpx'>{{item.cond_txt_d}}</text>
+          <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image>
         </view>
       </view>
+    </view>
+
+    <!--详细温度 start-->
+    <view class='weather_detail title' wx:for='{{cityDatas.daily_forecast}}' wx:key='{{index}}' wx:if='{{index<1}}'>
+    <text>实时详细预报</text>
     </view>
     <view class='details'>
       <view class='detail' wx:for='{{detailsDic.key}}' wx:key='{{index}}'>
@@ -63,6 +84,9 @@
         <view>{{cityDatas.now[item]}}</view>
       </view>
     </view>
+    <!--详细温度 end-->
+
+    <!--分时温度 start-->
     <view class='hourly' wx:if='{{hourlyDatas.length}}'>
       <view class='title'>24 小时逐 3 小时预报</view>
       <view class='hours'>
@@ -124,6 +148,25 @@
         </swiper>
       </view>
     </view>
+    <!--分时温度 end-->
+
+    <!--7预报start-->
+    <view class='guide' wx:if='{{cityDatas.daily_forecast}}'>
+      <view class='title'>7 天预报</view>
+      <view class='guides'>
+        <view class='item' wx:for='{{cityDatas.daily_forecast}}' wx:key='{{index}}'>
+          <view class='date i'>{{item.date}}</view>
+          <view class='temperature i'>{{item.tmp_min}}~{{item.tmp_max}}℃</view>
+          <view class='weather i'>
+            <text>{{item.cond_txt_d}}</text>
+            <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image>
+          </view>
+          <view class='wind i'>{{item.wind_dir}}{{item.wind_sc}}级</view>
+        </view>
+      </view>
+    </view>
+    <!--7预报end-->
+
     <!-- <ad unit-id="adunit-785cc3f710cc3d4c"></ad> -->
     <view class='livingIndex' wx:if='{{!setting.hiddenIndex}}'>
       <view class='item' wx:for='{{cityDatas.lifestyle}}' wx:key='{{index}}'>
@@ -134,19 +177,21 @@
         </view>
       </view>
     </view>
-    <view class='footer'>开发者 · myvin</view>
+    <view class='footer'>到底了</view>
   </view>
+  <!--天气信息 end-->
+
   <view wx:if='{{openSettingButtonShow}}' class='openSettingButton'>
     <image src='/img/unlock.png'></image>
     <button open-type='openSetting'></button>
   </view>
   <!-- 悬浮菜单 -->
   <view class='menus' wx:if='{{!bcgImgAreaShow}}'>
-    <image src="/img/share_circle.png" animation="{{animationOne}}" class="menu"></image>
-    <button plain='true' open-type='share' animation="{{animationOne}}" class='menu share'></button>
+    <!-- <image src="/img/share_circle.png" animation="{{animationOne}}" class="menu"></image> -->
+    <!-- <button plain='true' open-type='share' animation="{{animationOne}}" class='menu share'></button> -->
     <image src="/img/setting.png" animation="{{animationTwo}}" class="menu" catchtap="menuToSetting"></image>
     <image src="/img/location.png" animation="{{animationThree}}" class="menu" catchtap="menuToCitychoose"></image>
-    <image src="/img/info.png" animation="{{animationFour}}" class="menu" catchtap="menuToAbout"></image>
+    <!-- <image src="/img/info.png" animation="{{animationFour}}" class="menu" catchtap="menuToAbout"></image> -->
     <image src="/img/menu.png" animation="{{animationMain}}" class="menu main" catchtap="menuMain"></image>
   </view>
 </view>
