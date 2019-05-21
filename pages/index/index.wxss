@@ -286,6 +286,49 @@ page {
   font-size: 24rpx;
 }
 
+.recommend {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 180rpx;
+  flex-wrap: wrap;
+  background:rgba(0, 0, 0, .6);
+  margin-bottom:20rpx;
+  
+}
+
+.btn {
+  border: rgba(20, 196, 158, 0.5);
+  border-radius: 40rpx;
+  border-width: 1rpx;
+  border-style: solid;
+  width: 80%;
+  height: 80rpx;
+  font-size: 36rpx;
+  color: white;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn1::after{
+  border: none;
+}
+
+.recommend .tips{
+  font-size: 32rpx;
+  color: rgba(228, 224, 224, 0.884);
+}
+
+.recommend .btn image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 16rpx;
+}
+
 .todayAndTowmorr {
   display: flex;
   align-items: center;

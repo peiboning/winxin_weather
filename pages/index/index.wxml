@@ -178,6 +178,20 @@
     </view>
     <!--7预报end-->
 
+    <!--推荐start-->
+    <view class='recommend'>
+        <view class='tips'>
+          提醒朋友注意天气变化，更贴心
+        </view>
+        <button class='btn' open-type="share">
+          <image src='/img/share.png'></image>
+          <view>分享给朋友</view>
+        
+        </button>
+        
+    </view>
+    <!--推荐end-->
+
     <!-- <ad unit-id="adunit-785cc3f710cc3d4c"></ad> -->
     <view class='livingIndex' wx:if='{{!setting.hiddenIndex}}'>
       <view class='item' wx:for='{{cityDatas.lifestyle}}' wx:key='{{index}}'>
