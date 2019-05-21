@@ -663,7 +663,12 @@ Page({
   getWeek(date){
     var week = new Date(date).getDay();
     return weekArray[week];
-  }
+  },
+
+  shareApp(){
+    console.log('share app');
+    
+  },
 
 
 })

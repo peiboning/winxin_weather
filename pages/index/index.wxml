@@ -4,7 +4,7 @@
   <image class='bcg' wx:if='{{bcgImg}}' src='{{bcgImg}}' mode='aspectFill'></image>
 
   <!--搜索 start-->
-  <view id='search' class='search' wx:if='{{isShowSearch && !setting.hiddenSearch && !bcgImgAreaShow}}' style='background:rgba(255, 255, 255, 0);opacity:{{searchAlpha}}'>
+  <view id='search' class='search' wx:if='{{isShowSearch && !bcgImgAreaShow}}' style='background:rgba(255, 255, 255, 0);opacity:{{searchAlpha}}'>
     <view class='wrapper'>
       <image src='/img/search.png'></image>
       <input placeholder-class='placeholderClass' confirm-type='search' placeholder='请输入城市名，快速查询天气信息' maxlength='20' bindconfirm='commitSearch' value='{{searchText}}' disabled='{{!enableSearch}}'></input>
@@ -178,8 +178,22 @@
     </view>
     <!--7预报end-->
 
-    <!-- <ad unit-id="adunit-785cc3f710cc3d4c"></ad> -->
-    <view class='livingIndex' wx:if='{{!setting.hiddenIndex}}'>
+    <!--推荐start-->
+    <view class='recommend'>
+        <view class='tips'>
+          提醒朋友注意天气变化，更贴心
+        </view>
+        <button class='btn' open-type="share">
+          <image src='/img/share.png'></image>
+          <view>分享给朋友</view>
+        
+        </button>
+        
+    </view>
+    <!--推荐end-->
+
+    <!--生活指数-->
+    <view class='livingIndex'>
       <view class='item' wx:for='{{cityDatas.lifestyle}}' wx:key='{{index}}'>
         <image class='icon' src='/img/lifestyle_{{item.type}}.png'></image>
         <view class='right'>
