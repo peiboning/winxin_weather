@@ -160,12 +160,12 @@ page {
   font-size: 100rpx;
 }
 .info .pm text {
-  font-size: 24rpx;
+  font-size: 30rpx;
   height: 1em;
   line-height: 1em;
   padding: 10rpx 20rpx;
   border-radius: 20rpx;
-  background: rgba(240, 240, 240, .2);
+  background: rgba(37, 36, 36, 0.5);
 }
 .city {
   display: flex;

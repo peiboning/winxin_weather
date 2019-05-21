@@ -2,6 +2,7 @@ let utils = require('../../utils/utils')
 let globalData = getApp().globalData
 const key = globalData.key
 let SYSTEMINFO = globalData.systeminfo
+var weekArray = new Array("日", "一", "二", "三", "四", "五", "六");
 Page({
   data: {
     backgroundImage:'',
@@ -116,6 +117,16 @@ Page({
       searchCity: location,
     })
     wx.stopPullDownRefresh()
+    //添加星期信息
+    var daily_forecast = data.daily_forecast;
+    for(var i =0;i<daily_forecast.length;i++){
+      var temp = daily_forecast[i];
+      var week = this.getWeek(temp.date);
+      temp.week = week;
+    }
+    
+
+
     let now = new Date()
     // 存下来源数据
     data.updateTime = now.getTime()
@@ -311,7 +322,8 @@ Page({
     })
   },
   onPullDownRefresh (res) {
-    this.reloadPage()
+    this.setBcgImg1();
+    this.reloadPage();
   },
   getCityDatas() {
     let cityDatas = wx.getStorage({
@@ -630,8 +642,6 @@ Page({
     })
   },
 
-  
-
   onPageScroll: function (ev) {
     
         console.log("scroll top is " + ev.scrollTop)
@@ -648,6 +658,11 @@ Page({
       })
     }
 
+  },
+
+  getWeek(date){
+    var week = new Date(date).getDay();
+    return weekArray[week];
   }
 
 

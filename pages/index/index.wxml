@@ -155,13 +155,24 @@
       <view class='title'>7 天预报</view>
       <view class='guides'>
         <view class='item' wx:for='{{cityDatas.daily_forecast}}' wx:key='{{index}}'>
-          <view class='date i'>{{item.date}}</view>
+          
+          <view class='date i' wx:if='{{index == 0}}'>今天</view>
+          <view class='date i' wx:else>{{item.date}}</view>
+          <view class='week i'>星期{{item.week}}</view>
           <view class='temperature i'>{{item.tmp_min}}~{{item.tmp_max}}℃</view>
           <view class='weather i'>
             <text>{{item.cond_txt_d}}</text>
             <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image>
           </view>
           <view class='wind i'>{{item.wind_dir}}{{item.wind_sc}}级</view>
+          <view class='weather i'>
+            <image mode='widthFix' src='{{richu}}'></image>
+            <text>{{item.sr}}</text>
+          </view>
+          <view class='weather i'>
+          <image mode='widthFix' src='{{riluo}}'></image>
+            <text>{{item.ss}}</text>
+          </view>
         </view>
       </view>
     </view>
