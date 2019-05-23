@@ -5,6 +5,7 @@ let SYSTEMINFO = globalData.systeminfo
 var weekArray = new Array("日", "一", "二", "三", "四", "五", "六");
 Page({
   data: {
+    showKnowledgeDot:1,
     backgroundImage:'',
     air:{},
     searchAlpha:1.0,
@@ -432,6 +433,7 @@ Page({
     }
   },
   onShow() {
+    this.reloadKnowledgeDotStatus();
     // onShareAppMessage 要求同步返回
     if (!utils.isEmptyObject(this.data.shareInfo)) {
       return
@@ -529,7 +531,7 @@ Page({
   onShareAppMessage (res) {
     let shareInfo = this.data.shareInfo
     return {
-      title: shareInfo.title,
+      title: '关注生活,关注天气',
       path: shareInfo.path || '/pages/index/index',
       imageUrl: shareInfo.imageUrl,
     }
@@ -669,6 +671,27 @@ Page({
     console.log('share app');
     
   },
+  gotoWeatherKnowledge(){
+    console.log("gotoWeatherKnowledge")
+    wx.navigateTo({
+      url: '/pages/knowledge/knowledge',
+    })
+    wx.setStorage({
+      key: 'showKnowledgeDot',
+      data: 0,
+    })
+  },
 
+  reloadKnowledgeDotStatus(){
+    var that = this;
+    wx.getStorage({
+      key: 'showKnowledgeDot',
+      success: function(res) {
+        that.setData({
+          showKnowledgeDot:res.data
+        })
+      },
+    })
+  }
 
 })

@@ -12,6 +12,15 @@
   </view>
   <!--搜索 end-->
 
+  <!--tips-->
+  <view>
+    <view class='small_tips' catchtap='gotoWeatherKnowledge'>
+      <text>天气小知识</text>
+    </view>
+    <view class='dot' wx:if='{{showKnowledgeDot == 1}}'></view>
+  </view>
+  
+
   <!--背景选择 start-->
   <view class='chooseBcg' wx:if='{{bcgImgAreaShow}}'>
     <view class='top'>
@@ -186,7 +195,6 @@
         <button class='btn' open-type="share">
           <image src='/img/share.png'></image>
           <view>分享给朋友</view>
-        
         </button>
         
     </view>
