@@ -4,7 +4,10 @@
     "pages/about/about",
     "pages/citychoose/citychoose",
     "pages/setting/setting",
-    "pages/systeminfo/systeminfo"
+    "pages/systeminfo/systeminfo",
+    "pages/knowledge/knowledge",
+    "pages/detailknowledge/detailknowledge"
+
   ],
   "window": {
     "navigationBarBackgroundColor": "#40a7e7",
