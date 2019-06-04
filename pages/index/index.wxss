@@ -5,6 +5,9 @@ page {
 .num {
   font-weight: 300;
 }
+.offical_font{
+  color: #000
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -448,8 +451,8 @@ page {
   border-radius: 50%;
   position: fixed;
   z-index: 100;
-  bottom: 150rpx;
-  right: 70rpx;
+  bottom: 180rpx;
+  right: 20rpx;
   opacity: 0;
 }
 .menus .share {
