@@ -2,7 +2,7 @@
   <heartbeat id='heartbeat' wx:if='{{showHeartbeat}}'></heartbeat>
   <view class='bcg' wx:if='{{!bcgImg}}' style='background: {{bcgColor}}'></view>
   <image class='bcg' wx:if='{{bcgImg}}' src='{{bcgImg}}' mode='aspectFill'></image>
-
+  
   <!--搜索 start-->
   <view id='search' class='search' wx:if='{{isShowSearch && !bcgImgAreaShow}}' style='background:rgba(255, 255, 255, 0);opacity:{{searchAlpha}}'>
     <view class='wrapper'>
@@ -13,7 +13,7 @@
   <!--搜索 end-->
 
   <!--tips-->
-  <view>
+  <view wx:if='{{!isShowLocationTips}}'> 
     <view class='small_tips' catchtap='gotoWeatherKnowledge'>
       <text>天气小知识</text>
     </view>
@@ -46,6 +46,18 @@
       <image class='downArrow' src='/img/down.png'></image>
     </view>
     <!--头像end-->
+    <!--权限引导start-->
+    <view class='recommend' wx:if='{{isShowLocationTips}}'>
+        <view class='tips'>
+          需要使用定位权限，否则无法正常查看天气信息
+        </view>
+        <button class='btn' open-type="openSetting">
+          <image src='/img/location_s_w.png'></image>
+          <view>前往设置，开启定位权限</view>
+        </button>
+        
+    </view>
+    <!--权限引导end-->
 
     <!--天气信息 start-->
     <view class='info'>
@@ -208,12 +220,18 @@
           <view class='key'>{{lifestyles[item.type]}} {{item.brf}}</view>
           <view class='value'>{{item.txt}}</view>
         </view>
-      </view>
+      </view> 
     </view>
     <view class='footer'>到底了</view>
+
+    <!--公众号start-->
+    <official-account class='offical_font' bindload='officialLoad' binderror='officialerror'></official-account>
+    <!--公众号end-->
   </view>
   <!--天气信息 end-->
-
+  
+  
+  
   <view wx:if='{{openSettingButtonShow}}' class='openSettingButton'>
     <image src='/img/unlock.png'></image>
     <button open-type='openSetting'></button>

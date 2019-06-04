@@ -9,7 +9,7 @@
 	},
 	"cloudfunctionRoot": "cloudfunction/",
 	"compileType": "miniprogram",
-	"libVersion": "2.3.0",
+	"libVersion": "2.7.1",
 	"appid": "wx3eeedc747622e935",
 	"projectname": "life_weather",
 	"simulatorType": "wechat",
@@ -23,9 +23,24 @@
 			"current": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"plugin": {
 			"current": -1,
 			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "公众号推荐",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": 1047
+				}
+			]
 		}
 	}
 }

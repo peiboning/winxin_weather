@@ -5,6 +5,7 @@ let SYSTEMINFO = globalData.systeminfo
 var weekArray = new Array("日", "一", "二", "三", "四", "五", "六");
 Page({
   data: {
+    isShowLocationTips:false,
     showKnowledgeDot:1,
     backgroundImage:'',
     air:{},
@@ -126,8 +127,6 @@ Page({
       temp.week = week;
     }
     
-
-
     let now = new Date()
     // 存下来源数据
     data.updateTime = now.getTime()
@@ -145,21 +144,32 @@ Page({
     let errMsg = res.errMsg || ''
     // 拒绝授权地理位置权限
     if (errMsg.indexOf('deny') !== -1 || errMsg.indexOf('denied') !== -1) {
+      this.setData({
+        isShowLocationTips:true
+      })
       wx.showToast({
         title: '需要开启地理位置权限',
         icon: 'none',
         duration: 2500,
         success: (res) => {
-          if (this.canUseOpenSettingApi()) {
-            let timer = setTimeout(() => {
-              clearTimeout(timer)
-              wx.openSetting({})
-            }, 2500)
-          } else {
-            this.setData({
-              openSettingButtonShow: true,
-            })
-          }
+          // if (this.canUseOpenSettingApi()) {
+          //   // let timer = setTimeout(() => {
+          //   //   clearTimeout(timer)
+          //   //   wx.openSetting({
+          //   //     success(res) {
+          //   //       console.log("openSetting:"+res.authSetting)
+          //   //       // res.authSetting = {
+          //   //       //   "scope.userInfo": true,
+          //   //       //   "scope.userLocation": true
+          //   //       // }
+          //   //     }
+          //   //   })
+          //   // }, 2500)
+          // } else {
+          //   this.setData({
+          //     openSettingButtonShow: true,
+          //   })
+          // }
         },
       })
     } else {
@@ -433,11 +443,36 @@ Page({
     }
   },
   onShow() {
+    console.log("onShow..............");
+    wx.getSystemInfo({
+      success: function(res) {
+        console.log("getSystemInfo.............." + res.SDKVersion);
+      },
+    })
     this.reloadKnowledgeDotStatus();
-    // onShareAppMessage 要求同步返回
-    if (!utils.isEmptyObject(this.data.shareInfo)) {
-      return
-    }
+    var that = this;
+    // 检查权限
+    wx.getSetting({
+      success: function (res){
+        if (res.authSetting["scope.userLocation"] == true){
+          if(that.data.isShowLocationTips){
+            that.setData({
+              isShowLocationTips: false
+            })
+            that.reloadPage()
+          }
+          
+        }else{
+          that.setData({
+            isShowLocationTips: true
+          })
+          wx.showToast({
+            title: '获取地理位置权限失败',
+            icon: 'none',
+          })
+        }
+      }
+    })
   },
   onLoad () {
     var that = this;
@@ -646,7 +681,7 @@ Page({
 
   onPageScroll: function (ev) {
     
-        console.log("scroll top is " + ev.scrollTop)
+    console.log("scroll top is " + ev.scrollTop)
     var scrollTop = ev.scrollTop;
     if (scrollTop > this.data.searchHeight){
       this.setData({
@@ -692,6 +727,14 @@ Page({
         })
       },
     })
+  },
+
+  officialLoad(res){
+    console.log("officialLoad status:" + res.detail.status + ", msg:" + res.detail.errMsg)
+  },
+  officialerror(res){
+    console.log("officialerror status:" + res.detail.status + ", msg:" + res.detail.errMsg)
   }
+
 
 })
