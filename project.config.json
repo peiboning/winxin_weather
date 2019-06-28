@@ -9,7 +9,7 @@
 	},
 	"cloudfunctionRoot": "cloudfunction/",
 	"compileType": "miniprogram",
-	"libVersion": "2.7.1",
+	"libVersion": "2.7.2",
 	"appid": "wx3eeedc747622e935",
 	"projectname": "life_weather",
 	"simulatorType": "wechat",
@@ -38,7 +38,8 @@
 					"name": "公众号推荐",
 					"pathName": "pages/index/index",
 					"query": "",
-					"scene": 1047
+					"scene": 1036,
+					"referrerInfo": {}
 				}
 			]
 		}
