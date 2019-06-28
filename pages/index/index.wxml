@@ -19,6 +19,11 @@
     </view>
     <view class='dot' wx:if='{{showKnowledgeDot == 1}}'></view>
   </view>
+
+  <!--引导-->
+   <view class='guid'  animation="{{animationHiddenGuidView}}">
+    <text>点击添加到我的小程序，下次使用更方便</text>
+   </view>
   
 
   <!--背景选择 start-->

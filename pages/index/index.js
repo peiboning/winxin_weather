@@ -59,6 +59,7 @@ Page({
     animationOne: {},
     animationTwo: {},
     animationThree: {},
+    animationHiddenGuidView:{},
     // 是否切换了城市
     located: true,
     // 需要查询的城市
@@ -66,40 +67,6 @@ Page({
     setting: {},
     richu:'/img/richu.png',
     riluo:'/img/rila.png',
-    bcgImgList: [
-      {
-        src: '/img/beach-bird-birds-235787.jpg',
-        topColor: '#393836'
-      },
-      {
-        src: '/img/clouds-forest-idyllic-417102.jpg',
-        topColor: '#0085e5'
-      },
-      {
-        src: '/img/backlit-dawn-dusk-327466.jpg',
-        topColor: '#2d2225'
-      },
-      {
-        src: '/img/accomplishment-adventure-clear-sky-585825.jpg',
-        topColor: '#004a89'
-      },
-      {
-        src: '/img/fog-himalayas-landscape-38326.jpg',
-        topColor: '#b8bab9'
-      },
-      {
-        src: '/img/asphalt-blue-sky-clouds-490411.jpg',
-        topColor: '#009ffe'
-      },
-      {
-        src: '/img/aerial-climate-cold-296559.jpg',
-        topColor: '#d6d1e6'
-      },
-      {
-        src: '/img/beautiful-cold-dawn-547115.jpg',
-        topColor: '#ffa5bc'
-      }
-    ],
     bcgImgIndex: 0,
     bcgImg: '',
     bcgImgAreaShow: false,
@@ -373,37 +340,7 @@ Page({
     this.setNavigationBarColor();
     
   },
-  setBcgImg (index) {
-    // if (index !== undefined) {
-    //   this.setData({
-    //     bcgImgIndex: index,
-    //     bcgImg: this.data.bcgImgList[index].src,
-    //     bcgColor: this.data.bcgImgList[index].topColor,
-    //   })
-    //   this.setNavigationBarColor()
-    //   return
-    // }
-    // wx.getStorage({
-    //   key: 'bcgImgIndex',
-    //   success: (res) => {
-    //     let bcgImgIndex = res.data || 0
-    //     this.setData({
-    //       bcgImgIndex,
-    //       bcgImg: this.data.bcgImgList[bcgImgIndex].src,
-    //       bcgColor: this.data.bcgImgList[bcgImgIndex].topColor,
-    //     })
-    //     this.setNavigationBarColor()
-    //   },
-    //   fail: () => {
-    //     this.setData({
-    //       bcgImgIndex: 0,
-    //       bcgImg: this.data.bcgImgList[0].src,
-    //       bcgColor: this.data.bcgImgList[0].topColor,
-    //     })
-    //     this.setNavigationBarColor()
-    //   },
-    // })
-  },
+   
   setNavigationBarColor (color) {
     let bcgColor = color || this.data.bcgColor
     wx.setNavigationBarColor({
@@ -463,6 +400,7 @@ Page({
           }
           
         }else{
+          
           that.setData({
             isShowLocationTips: true
           })
@@ -473,6 +411,10 @@ Page({
         }
       }
     })
+
+    setTimeout(function(){
+      that.hiddenGuidView();
+    }, 6000)
   },
   onLoad () {
     var that = this;
@@ -489,11 +431,11 @@ Page({
 
   },
   reloadPage () {
-    //this.setBcgImg()
+    
     this.getCityDatas()
     this.reloadInitSetting()
     this.reloadWeather()
-    //this.reloadGetBroadcast()
+    
   },
   checkUpdate (setting) {
     // 兼容低版本
@@ -530,7 +472,6 @@ Page({
     let dataset = e.currentTarget.dataset
     let src = dataset.src
     let index = dataset.index
-    this.setBcgImg(index)
     wx.setStorage({
       key: 'bcgImgIndex',
       data: index,
@@ -678,9 +619,18 @@ Page({
       animationFour: animationFour.export(),
     })
   },
+  hiddenGuidView() {
+    let animationHidden = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out',
+    })
+    animationHidden.opacity(0).step()
+    this.setData({
+      animationHiddenGuidView: animationHidden.export()
+    })
+  },
 
   onPageScroll: function (ev) {
-    
     console.log("scroll top is " + ev.scrollTop)
     var scrollTop = ev.scrollTop;
     if (scrollTop > this.data.searchHeight){
@@ -734,7 +684,10 @@ Page({
   },
   officialerror(res){
     console.log("officialerror status:" + res.detail.status + ", msg:" + res.detail.errMsg)
-  }
+  },
+  launchAppError(e) {
+    console.log("app launch:"+e.detail.errMsg)
+  },
 
 
 })

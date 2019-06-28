@@ -515,3 +515,34 @@ page {
   /* opacity:0.3;透明度 */
 
 }
+
+.guid{
+  display: block;
+  text-align: right;
+  font-size: 28rpx;
+  z-index: 102;
+  position: fixed;
+  top: 30rpx;
+  right: 30rpx;
+  align-items: center;
+  /* align-items: right; */
+}
+.guid text{
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  padding-left: 25rpx;
+  padding-right: 25rpx;
+  border-radius: 20rpx;
+  background: rgba(37, 36, 36, 1);
+}
+
+.guid::before{
+  content: "";
+  width: 0rpx;
+  height: 0rpx;
+  border: 20rpx solid;
+  border-color: transparent transparent rgba(37, 36, 36, 1);
+  top: -40rpx;
+  left: 390rpx;
+  position: absolute;
+}
