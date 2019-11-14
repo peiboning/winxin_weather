@@ -12,8 +12,8 @@
   </view>
   <!--搜索 end-->
 
-  <!--tips-->
-  <view wx:if='{{!isShowLocationTips}}'> 
+  <!--tips 暂时隐藏，后续优化-->
+  <view wx:if='{{!isShowLocationTips && 1==0}}'> 
     <view class='small_tips' catchtap='gotoWeatherKnowledge'>
       <text>天气小知识</text>
     </view>
@@ -228,6 +228,24 @@
         </view>
       </view> 
     </view>
+
+    <!--功能start-->
+    <view class='recommendFunc'>
+        <button class='btn' catchtap='gotoWeatherKnowledge'>
+          
+          <view>天气小知识</view>
+        </button>
+        <button class='btn' catchtap='menuToCitychoose'>
+          
+          <view>选择城市</view>
+        </button>
+        <button class='btn' catchtap='menuToSetting'>
+          
+          <view>设置</view>
+        </button>
+    </view>
+    <!--功能end-->
+
     <!--底部广告-->
     <ad unit-id="adunit-043ac3859c708de7"></ad>
     <view class='footer'>到底了</view>
@@ -245,7 +263,7 @@
     <button open-type='openSetting'></button>
   </view>
   <!-- 悬浮菜单 -->
-  <view class='menus' wx:if='{{!bcgImgAreaShow}}'>
+  <view class='menus' wx:if='{{!bcgImgAreaShow && 1==0}}'>
     <!-- <image src="/img/share_circle.png" animation="{{animationOne}}" class="menu"></image> -->
     <!-- <button plain='true' open-type='share' animation="{{animationOne}}" class='menu share'></button> -->
     <image src="/img/setting.png" animation="{{animationTwo}}" class="menu" catchtap="menuToSetting"></image>
