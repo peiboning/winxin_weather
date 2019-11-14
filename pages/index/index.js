@@ -1,14 +1,16 @@
 let utils = require('../../utils/utils')
+const app = getApp()
 let globalData = getApp().globalData
 const key = globalData.key
 let SYSTEMINFO = globalData.systeminfo
 var weekArray = new Array("日", "一", "二", "三", "四", "五", "六");
 Page({
   data: {
+    tabbar: {},
     isShowLocationTips:false,
     showKnowledgeDot:1,
     backgroundImage:'',
-    air:{},
+    air:{}, 
     searchAlpha:1.0,
     searchHeight: 0,
     isShowSearch: true,
@@ -316,6 +318,8 @@ Page({
   setBcgImg1(){
     var data = new Date();
     var hours = data.getHours();
+    var date = data.getDate();
+    var month = data.getMonth() + 1;
     var color;
     console.log('now hours is :' + hours);
     var path = "";
@@ -331,6 +335,18 @@ Page({
     }else{
       color = '#3a96f5';
       path = '/img/baitian.jpg';
+    }
+
+    //国庆节背景
+    console.log('month :' + month + ',date:' + date);
+    if ((month == 9 && date > 1) || month == 10) {
+      color = '#a72922';
+      path = '/img/guoqing.png';
+    }
+    //中秋节背景
+    if ((month == 9 && date > 10 && date<16)) {
+      color = '#364362';
+      path = '/img/zhongqiu.png';
     }
     console.log('path :' + path);
     this.setData({
@@ -417,6 +433,7 @@ Page({
     }, 6000)
   },
   onLoad () {
+    // app.editTabbar();
     var that = this;
     this.setBcgImg1();//按时间来定背景
     this.reloadPage();
@@ -505,9 +522,26 @@ Page({
     })
   },
   onShareAppMessage (res) {
+
+    var data = new Date();
+    var hours = data.getHours();
+    var date = data.getDate();
+    var month = data.getMonth() + 1;
     let shareInfo = this.data.shareInfo
+    var shareTitle = '关注生活, 关注天气'
+
+    //国庆节分享语
+    console.log('month :' + month + ',date:' + date);
+    if ((month == 9 && date > 20)) {
+      shareTitle = '国庆佳节,关注出行天气';
+    }
+    //中秋节分享语
+    if ((month == 9 && date > 10 && date < 16)) {
+      shareTitle = '中秋佳节,关注出行天气';
+    }
+
     return {
-      title: '关注生活,关注天气',
+      title: shareTitle,
       path: shareInfo.path || '/pages/index/index',
       imageUrl: shareInfo.imageUrl,
     }
@@ -644,6 +678,8 @@ Page({
         searchAlpha: alph
       })
     }
+
+    
 
   },
 

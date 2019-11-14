@@ -7,7 +7,6 @@
     "pages/systeminfo/systeminfo",
     "pages/knowledge/knowledge",
     "pages/detailknowledge/detailknowledge"
-
   ],
   "window": {
     "navigationBarBackgroundColor": "#40a7e7",

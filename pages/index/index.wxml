@@ -111,7 +111,8 @@
       </view>
     </view>
     <!--详细温度 end-->
-
+    <!--中部广告-->
+    <ad unit-id="adunit-9940ff689164a445"></ad>
     <!--分时温度 start-->
     <view class='hourly' wx:if='{{hourlyDatas.length}}'>
       <view class='title'>24 小时逐 3 小时预报</view>
@@ -227,6 +228,8 @@
         </view>
       </view> 
     </view>
+    <!--底部广告-->
+    <ad unit-id="adunit-043ac3859c708de7"></ad>
     <view class='footer'>到底了</view>
 
     <!--公众号start-->
