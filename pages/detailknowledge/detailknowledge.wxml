@@ -2,6 +2,8 @@
   <view class='pm' wx:if="{{showInfo == 1}}">
     <view class='title'>什么是PM2.5？</view>
     <view class='divLine'></view>
+    <ad unit-id="adunit-570a2fcf22a43443"></ad>
+    <view class='divLine'></view>
     <view class='content_p'>
       <text decode='{{true}}'>&nbsp;&nbsp;很多时候，真的分不清是雾？是霾？还是PM2.5?</text>
     </view>
@@ -58,6 +60,8 @@
   <view class='pm' wx:if="{{showInfo == 2}}">
     <view class='title'>雨雪等级判断标准</view>
     <view class='divLine'></view>
+    <ad unit-id="adunit-1f9f8d91ac1b63d9"></ad>
+    <view class='divLine'></view>
     <view class='table_snow_title'>雨的判断标准：一天内的降雨量</view>
     <view class='table_snow'>
       <view class='detail'>0~10毫米</view><view class='detail'>小雨</view>
@@ -87,6 +91,8 @@
 
   <view class='pm' wx:if="{{showInfo == 3}}">
     <view class='title'>风力等级判断标准</view>
+    <view class='divLine'></view>
+    <ad unit-id="adunit-e3187813bc5e47c2"></ad>
     <view class='divLine'></view>
     <view class='table_wind'>
       <view class='head'>风级</view><view class='head'>名称</view><view class='head'>风速(公里/小时)</view><view class='head'>地面现象</view>
