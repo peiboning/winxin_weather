@@ -6,8 +6,45 @@
     "pages/setting/setting",
     "pages/systeminfo/systeminfo",
     "pages/knowledge/knowledge",
-    "pages/detailknowledge/detailknowledge"
+    "pages/detailknowledge/detailknowledge",
+    "pages/filmlist/filmlist",
+    "pages/filmDetail/filmDetail",
+    "pages/home/home",
+    "pages/notice/about",
+    "pages/rili/rili"
   ],
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#268dcd",
+    "borderStyle": "white",
+    "backgroundColor": "#fafafa",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "img/weather_tab.png",
+        "selectedIconPath": "img/weather_tab_active.png",
+        "text": "天气"
+      },
+      {
+        "pagePath": "pages/filmlist/filmlist",
+        "iconPath": "img/film_tab.png",
+        "selectedIconPath": "img/film_tab_active.png",
+        "text": "电影"
+      },
+      {
+        "pagePath": "pages/rili/rili",
+        "iconPath": "img/rili.png",
+        "selectedIconPath": "img/rili_active.png",
+        "text": "日历"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "img/home.png",
+        "selectedIconPath": "img/home_active.png",
+        "text": "我的"
+      }
+    ]
+  },
   "window": {
     "navigationBarBackgroundColor": "#40a7e7",
     "navigationBarTitleText": "生活天气",
@@ -18,5 +55,8 @@
       "desc": "定位以获取当前位置天气信息"
     }
   },
+  "navigateToMiniProgramAppIdList": [
+    "wx88c2c06bffd9c457"
+  ],
   "sitemapLocation": "sitemap.json"
 }

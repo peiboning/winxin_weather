@@ -1,8 +1,5 @@
 {
   "navigationBarTitleText": "生活天气",
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-    "heartbeat": "/components/heartbeat/heartbeat"
-  }
+  "enablePullDownRefresh": true
 
 }

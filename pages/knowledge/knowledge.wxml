@@ -20,5 +20,6 @@
     <view class='arrow'/>
   </view>
   <view class='divLine'></view>
-  <ad unit-id="adunit-2b7b99362393fbbd"></ad>
+  <ad unit-id="adunit-87b28112776afa33" ad-type="video" ad-theme="white"></ad>
+  <!-- <ad unit-id="adunit-2b7b99362393fbbd"></ad> -->
 </view>

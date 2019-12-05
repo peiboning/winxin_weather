@@ -121,24 +121,7 @@ Page({
         icon: 'none',
         duration: 2500,
         success: (res) => {
-          // if (this.canUseOpenSettingApi()) {
-          //   // let timer = setTimeout(() => {
-          //   //   clearTimeout(timer)
-          //   //   wx.openSetting({
-          //   //     success(res) {
-          //   //       console.log("openSetting:"+res.authSetting)
-          //   //       // res.authSetting = {
-          //   //       //   "scope.userInfo": true,
-          //   //       //   "scope.userLocation": true
-          //   //       // }
-          //   //     }
-          //   //   })
-          //   // }, 2500)
-          // } else {
-          //   this.setData({
-          //     openSettingButtonShow: true,
-          //   })
-          // }
+          
         },
       })
     } else {
@@ -337,17 +320,7 @@ Page({
       path = '/img/baitian.jpg';
     }
 
-    //国庆节背景
-    console.log('month :' + month + ',date:' + date);
-    if ((month == 9 && date > 1) || month == 10) {
-      color = '#a72922';
-      path = '/img/guoqing.png';
-    }
-    //中秋节背景
-    if ((month == 9 && date > 10 && date<16)) {
-      color = '#364362';
-      path = '/img/zhongqiu.png';
-    }
+    //FIXME 删除国庆和中秋背景
     console.log('path :' + path);
     this.setData({
       bcgImg: path,
@@ -444,8 +417,24 @@ Page({
       that.data.searchHeight = res[0].height;
       console.log("search height is :" + that.data.searchHeight);
     })
+    // this.loadInterstitialAd();
 
-
+  },
+  loadInterstitialAd(){
+    console.log('loadInterstitialAd....')
+    let interstitialAd = wx.createInterstitialAd({
+      adUnitId: 'adunit-a0076e453f49a821'
+    })
+    interstitialAd.onLoad(() => { 
+      console.log('loadInterstitialAd show....')
+      interstitialAd.show().catch((err) => {
+        console.error(err)
+      })
+    })
+    interstitialAd.onError((err) => { 
+      console.error(err)
+    })
+    interstitialAd.onClose(() => { })
   },
   reloadPage () {
     
@@ -703,6 +692,7 @@ Page({
     })
   },
 
+
   reloadKnowledgeDotStatus(){
     var that = this;
     wx.getStorage({
@@ -724,6 +714,10 @@ Page({
   launchAppError(e) {
     console.log("app launch:"+e.detail.errMsg)
   },
+  adViewClick() {
+    console.log("ad click......")
+  },
+
 
 
 })

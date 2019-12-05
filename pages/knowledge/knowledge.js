@@ -6,7 +6,6 @@ Page({
     showInfo:1,
   },
   onLoad(){
-    // app.editTabbar();
   },
 
   onShow(){
@@ -21,6 +20,11 @@ Page({
   },
   gotoWind(){
     this.gotoDetailPage(3)
+  },
+  gotoVideo() {
+    wx.navigateTo({
+      url: '/pages/filmlist/filmlist',
+    })
   },
   /**
    * 用户点击右上角分享

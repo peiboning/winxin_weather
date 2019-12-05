@@ -24,23 +24,6 @@
    <view class='guid'  animation="{{animationHiddenGuidView}}">
     <text>点击添加到我的小程序，下次使用更方便</text>
    </view>
-  
-
-  <!--背景选择 start-->
-  <view class='chooseBcg' wx:if='{{bcgImgAreaShow}}'>
-    <view class='top'>
-      <view class='title'>更换背景</view>
-      <view class='bcgs'>
-        <view class='border {{bcgImgIndex === index ? "active" : ""}}' wx:for='{{bcgImgList}}' wx:key='{{index}}'>
-          <image src='{{item.src}}' catchtap='chooseBcg' data-index='{{index}}' data-src='{{item.src}}'></image>
-        </view>
-      </view>
-    </view>
-    <view class='close' catchtap='hideBcgImgArea'>
-      <image src='/img/up-arrow.png'></image>
-    </view>
-  </view>
-  <!--背景选择 end-->
 
   <!--内容-->
   <view id="mainView" class='content' wx:if='{{!bcgImgAreaShow}}' style='margin-top: {{setting.hiddenSearch ? 20 : 60}}px'>
@@ -74,7 +57,7 @@
         </view>
         <text class='time' wx:if='{{cityDatas.updateTimeFormat}}'>{{cityDatas.updateTimeFormat}} 更新</text>
       </view>
-      <view class='message'>{{message}}</view>
+      
       <view class='temp num' decode='true'>{{cityDatas.now.tmp || '-'}}
         <text style='font-size:50rpx;position:relative;top:-20px;'>℃</text>
       </view>
@@ -247,7 +230,9 @@
     <!--功能end-->
 
     <!--底部广告-->
+    
     <ad unit-id="adunit-043ac3859c708de7"></ad>
+
     <view class='footer'>到底了</view>
 
     <!--公众号start-->

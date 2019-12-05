@@ -7,7 +7,6 @@
 		"minified": true,
 		"newFeature": true
 	},
-	"cloudfunctionRoot": "cloudfunction/",
 	"compileType": "miniprogram",
 	"libVersion": "2.7.2",
 	"appid": "wx3eeedc747622e935",

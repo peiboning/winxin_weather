@@ -2,6 +2,6 @@
   "navigationBarTitleText": "小知识",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "heartbeat": "/components/heartbeat/heartbeat"
+    
   }
 }

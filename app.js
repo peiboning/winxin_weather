@@ -1,6 +1,12 @@
+var integralUtils = require('utils/Integral.js') 
 App({
   onLaunch () {
-   
+    var that = this
+    integralUtils.getIntegral.call(that)
+    wx.cloud.init({
+      env: 'weather-id',
+      traceUser: true,
+    })
 
     wx.getSystemInfo({
       success: (res) => {
@@ -15,6 +21,7 @@ App({
   
   globalData: {
     // 是否保持常亮，离开小程序失效
+    xcx_version: '1.7.5',
     keepscreenon:false,
     systeminfo: {},
     isIPhoneX: false,
@@ -26,5 +33,7 @@ App({
       air:'https://free-api.heweather.net/s6/air/now'
     },
     cityDatas: {},
+    filmInfo:{},
+    integral:0,
   },
 })
